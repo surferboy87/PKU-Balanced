@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="Product" representedClassName="Product" syncable="YES">
+        <attribute name="baseUnit" attributeType="String" syncable="YES"/>
+        <attribute name="basicAmount" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="carbohydrates" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="dietaryFibre" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="energyKcal" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="energyKj" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="fat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="pheValue" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="salt" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="saturates" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sugar" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="protocols" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Protocol" inverseName="product" inverseEntity="Protocol" syncable="YES"/>
+    </entity>
+    <entity name="Protocol" representedClassName=".Protocol" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="protocols" inverseEntity="Product" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Product" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="Protocol" positionX="-63" positionY="81" width="128" height="90"/>
+    </elements>
+</model>

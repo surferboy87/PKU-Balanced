@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6437CB941D0D526F00ECDC29 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6437CB931D0D526F00ECDC29 /* ProductTableViewCell.swift */; };
+		64645A4D1D13D8680054296A /* DayProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A4C1D13D8680054296A /* DayProtocolTableViewCell.swift */; };
+		64645A591D1527A20054296A /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A581D1527A20054296A /* ProductDetailViewController.swift */; };
+		64645A651D1B06F00054296A /* ProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A641D1B06F00054296A /* ProtocolTableViewCell.swift */; };
+		64645A671D1B080A0054296A /* ProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A661D1B080A0054296A /* ProtocolViewController.swift */; };
+		64645A691D1BE3B70054296A /* ProtocolDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A681D1BE3B70054296A /* ProtocolDetailViewController.swift */; };
+		64645A6B1D1BECCF0054296A /* DetailProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64645A6A1D1BECCF0054296A /* DetailProtocolTableViewCell.swift */; };
+		648ABCCC1D107E5D0000F0E4 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648ABCCA1D107E5D0000F0E4 /* Product+CoreDataProperties.swift */; };
+		648ABCCD1D107E5D0000F0E4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648ABCCB1D107E5D0000F0E4 /* Product.swift */; };
+		648ABCD01D1084920000F0E4 /* Protocol+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648ABCCE1D1084920000F0E4 /* Protocol+CoreDataProperties.swift */; };
+		648ABCD11D1084920000F0E4 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648ABCCF1D1084920000F0E4 /* Protocol.swift */; };
+		64F3FB111D0C6CE70083B4F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3FB101D0C6CE70083B4F2 /* AppDelegate.swift */; };
+		64F3FB161D0C6CE70083B4F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64F3FB141D0C6CE70083B4F2 /* Main.storyboard */; };
+		64F3FB191D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64F3FB171D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodeld */; };
+		64F3FB1B1D0C6CE70083B4F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F3FB1A1D0C6CE70083B4F2 /* Assets.xcassets */; };
+		64F3FB1E1D0C6CE70083B4F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64F3FB1C1D0C6CE70083B4F2 /* LaunchScreen.storyboard */; };
+		64F3FB261D0C6E120083B4F2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3FB251D0C6E120083B4F2 /* HomeViewController.swift */; };
+		64F3FB281D0C74620083B4F2 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3FB271D0C74620083B4F2 /* ProductTableViewController.swift */; };
+		64F3FB2A1D0C8B670083B4F2 /* NewProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3FB291D0C8B670083B4F2 /* NewProductTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6437CB931D0D526F00ECDC29 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		64645A4C1D13D8680054296A /* DayProtocolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayProtocolTableViewCell.swift; sourceTree = "<group>"; };
+		64645A581D1527A20054296A /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		64645A641D1B06F00054296A /* ProtocolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolTableViewCell.swift; sourceTree = "<group>"; };
+		64645A661D1B080A0054296A /* ProtocolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolViewController.swift; sourceTree = "<group>"; };
+		64645A681D1BE3B70054296A /* ProtocolDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolDetailViewController.swift; sourceTree = "<group>"; };
+		64645A6A1D1BECCF0054296A /* DetailProtocolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProtocolTableViewCell.swift; sourceTree = "<group>"; };
+		648ABCCA1D107E5D0000F0E4 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		648ABCCB1D107E5D0000F0E4 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		648ABCCE1D1084920000F0E4 /* Protocol+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Protocol+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		648ABCCF1D1084920000F0E4 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		64F3FB0D1D0C6CE70083B4F2 /* PKU Balanced.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PKU Balanced.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F3FB101D0C6CE70083B4F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		64F3FB151D0C6CE70083B4F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		64F3FB181D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PKU_Balanced.xcdatamodel; sourceTree = "<group>"; };
+		64F3FB1A1D0C6CE70083B4F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		64F3FB1D1D0C6CE70083B4F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		64F3FB1F1D0C6CE70083B4F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64F3FB251D0C6E120083B4F2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		64F3FB271D0C74620083B4F2 /* ProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
+		64F3FB291D0C8B670083B4F2 /* NewProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductTableViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64F3FB0A1D0C6CE70083B4F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		648ABCC91D107DC00000F0E4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				648ABCCE1D1084920000F0E4 /* Protocol+CoreDataProperties.swift */,
+				648ABCCF1D1084920000F0E4 /* Protocol.swift */,
+				648ABCCA1D107E5D0000F0E4 /* Product+CoreDataProperties.swift */,
+				648ABCCB1D107E5D0000F0E4 /* Product.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		64F3FB041D0C6CE70083B4F2 = {
+			isa = PBXGroup;
+			children = (
+				64F3FB0F1D0C6CE70083B4F2 /* PKU Balanced */,
+				64F3FB0E1D0C6CE70083B4F2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64F3FB0E1D0C6CE70083B4F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64F3FB0D1D0C6CE70083B4F2 /* PKU Balanced.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64F3FB0F1D0C6CE70083B4F2 /* PKU Balanced */ = {
+			isa = PBXGroup;
+			children = (
+				648ABCC91D107DC00000F0E4 /* CoreData */,
+				64F3FB101D0C6CE70083B4F2 /* AppDelegate.swift */,
+				6437CB931D0D526F00ECDC29 /* ProductTableViewCell.swift */,
+				64645A641D1B06F00054296A /* ProtocolTableViewCell.swift */,
+				64645A6A1D1BECCF0054296A /* DetailProtocolTableViewCell.swift */,
+				64645A581D1527A20054296A /* ProductDetailViewController.swift */,
+				64645A681D1BE3B70054296A /* ProtocolDetailViewController.swift */,
+				64645A661D1B080A0054296A /* ProtocolViewController.swift */,
+				64F3FB291D0C8B670083B4F2 /* NewProductTableViewController.swift */,
+				64645A4C1D13D8680054296A /* DayProtocolTableViewCell.swift */,
+				64F3FB271D0C74620083B4F2 /* ProductTableViewController.swift */,
+				64F3FB251D0C6E120083B4F2 /* HomeViewController.swift */,
+				64F3FB141D0C6CE70083B4F2 /* Main.storyboard */,
+				64F3FB1A1D0C6CE70083B4F2 /* Assets.xcassets */,
+				64F3FB1C1D0C6CE70083B4F2 /* LaunchScreen.storyboard */,
+				64F3FB1F1D0C6CE70083B4F2 /* Info.plist */,
+				64F3FB171D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodeld */,
+			);
+			path = "PKU Balanced";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64F3FB0C1D0C6CE70083B4F2 /* PKU Balanced */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64F3FB221D0C6CE70083B4F2 /* Build configuration list for PBXNativeTarget "PKU Balanced" */;
+			buildPhases = (
+				64F3FB091D0C6CE70083B4F2 /* Sources */,
+				64F3FB0A1D0C6CE70083B4F2 /* Frameworks */,
+				64F3FB0B1D0C6CE70083B4F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PKU Balanced";
+			productName = "PKU Balanced";
+			productReference = 64F3FB0D1D0C6CE70083B4F2 /* PKU Balanced.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64F3FB051D0C6CE70083B4F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Raphael Huber";
+				TargetAttributes = {
+					64F3FB0C1D0C6CE70083B4F2 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 64F3FB081D0C6CE70083B4F2 /* Build configuration list for PBXProject "PKU Balanced" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 64F3FB041D0C6CE70083B4F2;
+			productRefGroup = 64F3FB0E1D0C6CE70083B4F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64F3FB0C1D0C6CE70083B4F2 /* PKU Balanced */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64F3FB0B1D0C6CE70083B4F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64F3FB1E1D0C6CE70083B4F2 /* LaunchScreen.storyboard in Resources */,
+				64F3FB1B1D0C6CE70083B4F2 /* Assets.xcassets in Resources */,
+				64F3FB161D0C6CE70083B4F2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64F3FB091D0C6CE70083B4F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64645A671D1B080A0054296A /* ProtocolViewController.swift in Sources */,
+				64F3FB191D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodeld in Sources */,
+				648ABCCD1D107E5D0000F0E4 /* Product.swift in Sources */,
+				64F3FB111D0C6CE70083B4F2 /* AppDelegate.swift in Sources */,
+				64645A651D1B06F00054296A /* ProtocolTableViewCell.swift in Sources */,
+				64F3FB2A1D0C8B670083B4F2 /* NewProductTableViewController.swift in Sources */,
+				648ABCD01D1084920000F0E4 /* Protocol+CoreDataProperties.swift in Sources */,
+				64645A591D1527A20054296A /* ProductDetailViewController.swift in Sources */,
+				64645A691D1BE3B70054296A /* ProtocolDetailViewController.swift in Sources */,
+				648ABCD11D1084920000F0E4 /* Protocol.swift in Sources */,
+				64F3FB281D0C74620083B4F2 /* ProductTableViewController.swift in Sources */,
+				64F3FB261D0C6E120083B4F2 /* HomeViewController.swift in Sources */,
+				64645A6B1D1BECCF0054296A /* DetailProtocolTableViewCell.swift in Sources */,
+				648ABCCC1D107E5D0000F0E4 /* Product+CoreDataProperties.swift in Sources */,
+				6437CB941D0D526F00ECDC29 /* ProductTableViewCell.swift in Sources */,
+				64645A4D1D13D8680054296A /* DayProtocolTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		64F3FB141D0C6CE70083B4F2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64F3FB151D0C6CE70083B4F2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		64F3FB1C1D0C6CE70083B4F2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64F3FB1D1D0C6CE70083B4F2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64F3FB201D0C6CE70083B4F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		64F3FB211D0C6CE70083B4F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64F3FB231D0C6CE70083B4F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "PKU Balanced/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "private.PKU-Balanced";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		64F3FB241D0C6CE70083B4F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "PKU Balanced/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "private.PKU-Balanced";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64F3FB081D0C6CE70083B4F2 /* Build configuration list for PBXProject "PKU Balanced" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64F3FB201D0C6CE70083B4F2 /* Debug */,
+				64F3FB211D0C6CE70083B4F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64F3FB221D0C6CE70083B4F2 /* Build configuration list for PBXNativeTarget "PKU Balanced" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64F3FB231D0C6CE70083B4F2 /* Debug */,
+				64F3FB241D0C6CE70083B4F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		64F3FB171D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				64F3FB181D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodel */,
+			);
+			currentVersion = 64F3FB181D0C6CE70083B4F2 /* PKU_Balanced.xcdatamodel */;
+			path = PKU_Balanced.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 64F3FB051D0C6CE70083B4F2 /* Project object */;
+}
