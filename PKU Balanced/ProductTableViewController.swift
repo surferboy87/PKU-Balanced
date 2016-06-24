@@ -56,7 +56,7 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Table view data source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // Return the number of sections
         return 1
     }
 
@@ -217,9 +217,6 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
             }
                 
             // Pass the selected object to the new view controller.
-
-            
-
             
         }
     }

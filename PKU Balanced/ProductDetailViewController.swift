@@ -43,11 +43,11 @@ class ProductDetailViewController: UIViewController, UITextFieldDelegate {
             self.inputAmount.backgroundColor = self.backgroundColorInputFailure
         } else {
             Protocol.createInManagedObjectContext(managedObjectContext, inputAmount: (self.inputAmount.text! as NSString).integerValue, inputProduct: self.receivedProduct)
-            (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
             self.inputAmount.backgroundColor = UIColor.whiteColor()
-            self.navigationController?.popViewControllerAnimated(true)
         }
         
+        (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func inputValueChange(sender: UITextField) {
