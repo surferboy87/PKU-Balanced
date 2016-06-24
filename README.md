@@ -16,6 +16,7 @@ Der Fokus wurde Hauptsächlich auf Grundlegende Funktionen von iOS und Xcode mit
 ## Die Realisation
 - Der Anwender hat die Möglichkeit ein neues Produkt zu erfassen, dem Tagesprotokoll hinzuzufügen und auch nachträglich zu bearbeiten.
 - Die Tagesprotokolle können auch noch nachträglich eingesehen werden.
+- Optimiert für iPhone 5
 
 ## Features
 
