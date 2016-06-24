@@ -12,30 +12,41 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var protocolTableView: UITableView!
     
-    var protocolDataArray = [Protocol]()
+    // Retreive the managedObjectContext and numberFormatter from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let numberFormatter = (UIApplication.sharedApplication().delegate as! AppDelegate).numberFormatter
+
     let dateFormatter = NSDateFormatter()
+    
+    // CH date format
     let chDateFormatTemplate = NSDateFormatter.dateFormatFromTemplate("ddMMyyyy", options: 0, locale: NSLocale(localeIdentifier: "de-CH"))
-    var numberFormatter = (UIApplication.sharedApplication().delegate as! AppDelegate).numberFormatter
+    
+    var protocolDataArray = [Protocol]()
     
     var dayProtocols: [String: [Protocol]] = Dictionary()
+    
     var reverseSortedDayProtocolsKeys = [String]()
     
+    // Passed from segue
     var passedDefaults: NSUserDefaults!
     
-    // Retreive the managedObjectContext from AppDelegate
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
+        // Fetching all protocols
         self.protocolDataArray = Protocol.fetchAllProtocols(self.managedObjectContext)
+        
+        // Set date format of the dateFormatter to CH
         self.dateFormatter.dateFormat = self.chDateFormatTemplate
         
-        for aProtocol in protocolDataArray {
+        //Set up a dictionary with a formatted date (e.g. 24.06.2016) as key and each protocol with that date to an array
+        for aProtocol in self.protocolDataArray {
+            
+            // Define the key
             let keyDate = self.dateFormatter.stringFromDate(aProtocol.date!)
-
+        
+            // If protocolArrayOfKey has a key keyDate, add aProtocol to the array, otherwise create a new key and add aProtocol
             if var protocolArrayOfKey = self.dayProtocols[keyDate] {
                 protocolArrayOfKey.append(aProtocol)
                 self.dayProtocols[keyDate] = protocolArrayOfKey
@@ -44,7 +55,10 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
+        // Sort keys of the dayProtocols dictionary in store them in a new array
         let sortedDayProtocolsKeys = Array(self.dayProtocols.keys).sort()
+        
+        // Sort sortedDayProtocolsKeys array in revers order
         self.reverseSortedDayProtocolsKeys = sortedDayProtocolsKeys.reverse()
         
         self.protocolTableView.dataSource = self
@@ -52,14 +66,18 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
     override func viewWillAppear(animated: Bool) {
+        // Reload the table view
         self.protocolTableView.reloadData()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     // MARK: - Table view data source
     
@@ -70,35 +88,35 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows
-        return dayProtocols.count
+        return self.dayProtocols.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("protocolCell", forIndexPath: indexPath) as! ProtocolTableViewCell
         
-        
+        // Get the key of the selected table row
         let key = self.reverseSortedDayProtocolsKeys[indexPath.row]
+        
+        // Calculate the phe value of that protocol
         let calculatedPheValue = self.calculateProtocolPheValue(self.dayProtocols[key]!)
         
         // Configure the cell...
         cell.protocolDate.text = key
         cell.pheValue.text = self.numberFormatter.stringFromNumber(calculatedPheValue)
         
+        // Compare calculatedPheValue to the stored pheLimit in user defaults and coloring the text of the label
         if calculatedPheValue > self.passedDefaults.doubleForKey("pheLimit"){
             cell.pheValue.textColor = UIColor.redColor()
         } else {
             cell.pheValue.textColor = UIColor.greenColor()
         }
         
-        
         return cell
     }
     
+    
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
     
     // Override to support conditional editing of the table view.
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -107,24 +125,12 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
+    // Sum up all the phe value of a protocol in a protocol array
     func calculateProtocolPheValue(someProtocols: [Protocol]) -> Double {
+        
         var pheValue = 0.0
-        for aProtocol in someProtocols{
+        
+        for aProtocol in someProtocols {
             let base = Double((aProtocol.product?.pheValue)!) / Double((aProtocol.product?.basicAmount)!)
             pheValue += Double(aProtocol.amount!) * base
         }
@@ -137,7 +143,7 @@ class ProtocolViewController: UIViewController, UITableViewDelegate, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        // Get the new view controller using segue.destinationViewController.
+        // Get the new view controller
         let viewController: ProtocolDetailViewController = segue.destinationViewController as! ProtocolDetailViewController
         
         // Pass the selected object to the new view controller.

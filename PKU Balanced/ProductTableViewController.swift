@@ -13,39 +13,47 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet var productTableView: UITableView!
     
-    var selectedProductIndex: Int = 0
+    // Set the background color for a invalid input field
     let backgroundColorInputFailure = UIColor.redColor().colorWithAlphaComponent(0.3)
     
     var productsDataArray = [Product]()
     
     var filteredArray = [Product]()
     
+    // Bool to indicate if in search mode
     var shouldShowSearchResults = false
     
     var searchController: UISearchController!
     
+    var selectedProductIndex: Int = 0
+    
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //fetchProduct()
-        productsDataArray = Product.fetchProduct(managedObjectContext)
+        // Fetching the stored Products
+        self.productsDataArray = Product.fetchProduct(managedObjectContext)
         
-        productTableView.dataSource = self
-        productTableView.delegate = self
+        self.productTableView.dataSource = self
+        self.productTableView.delegate = self
         
-        configureSearchController()
+        // Configure the search controller
+        self.configureSearchController()
         
     }
     
+    
+    // When the View will appear, fetch the products
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         productsDataArray = Product.fetchProduct(managedObjectContext)
         productTableView.reloadData()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,8 +68,9 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
         return 1
     }
 
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows
+        // Return the number of rows based on the number of products and if in search mode
         if self.shouldShowSearchResults {
             return self.filteredArray.count
         } else {
@@ -73,7 +82,7 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("productCell", forIndexPath: indexPath) as! ProductTableViewCell
 
-        // Configure the cell...
+        // Configure the cell... depending if in search mode
         
         if self.shouldShowSearchResults {
             cell.productName.text = self.filteredArray[indexPath.row].name
@@ -85,30 +94,38 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let product = productsDataArray[indexPath.row]
-        self.selectedProductIndex = indexPath.row
-        //print(product.name!)
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let product = productsDataArray[indexPath.row]
+//        self.selectedProductIndex = indexPath.row
+//        //print(product.name!)
+//    }
 
+    // MARK: UITableViewDelegate
+    
     // Override to support conditional editing of the table view.
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
+    
+    // Set possible options if table row is swiped to left
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
+        // Get the product which was selected in the table
         let productToEdit = productsDataArray[indexPath.row]
         
+        // Define the edit button action
         let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
             
-            
+            // Show the NewProductTableViewController with the selected product as sender
             self.performSegueWithIdentifier("showNewProductView", sender: productToEdit)
         }
         
+        // Set the backgroundColor of the edit "button"
         edit.backgroundColor = UIColor.darkGrayColor()
         
+        // Define the deleteAction
         let delete = UITableViewRowAction(style: .Normal, title: "Löschen") { action, index in
             
             // Delete it from the managedObjectContext
@@ -121,26 +138,13 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
             self.productTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
         }
+        
+        // Set the backgroundColor of the delete "button"
         delete.backgroundColor = UIColor.redColor()
         
         return [delete, edit]
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     // MARK: - Search
     
@@ -201,23 +205,25 @@ class ProductTableViewController: UIViewController, UITableViewDelegate, UITable
         
         if segue.identifier == "showProductDetailView" {
             
-            // Get the new view controller using segue.destinationViewController.
+            // Get the new view controller
             let viewController: ProductDetailViewController = segue.destinationViewController as! ProductDetailViewController
             
             // Pass the selected object to the new view controller.
-            viewController.receivedProduct = self.productsDataArray[(self.productTableView.indexPathForSelectedRow?.row)!]
+            viewController.passedProduct = self.productsDataArray[(self.productTableView.indexPathForSelectedRow?.row)!]
         }
+        
         
         if segue.identifier == "showNewProductView" {
 
             if let product = sender as? Product {
+                
+                // Get the new view controller
                 let viewController: NewProductTableViewController = segue.destinationViewController as! NewProductTableViewController
+                
+                // Pass the selected object to the new view controller.
                 viewController.passedProduct = product
                 viewController.editMode = true
             }
-                
-            // Pass the selected object to the new view controller.
-            
         }
     }
 }

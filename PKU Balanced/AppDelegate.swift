@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     lazy var numberFormatter: NSNumberFormatter = {
+        // Returns a number formatter with the current local and a maximum fraction digit of two
         let formatter = NSNumberFormatter()
         formatter.locale = NSLocale.currentLocale()
         formatter.maximumFractionDigits = 2

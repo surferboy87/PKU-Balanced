@@ -74,6 +74,25 @@
 			name = TableViewCells;
 			sourceTree = "<group>";
 		};
+		64645A6D1D1DBD9E0054296A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				64645A681D1BE3B70054296A /* ProtocolDetailViewController.swift */,
+				64645A661D1B080A0054296A /* ProtocolViewController.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		64645A6E1D1DBDBB0054296A /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				64645A581D1527A20054296A /* ProductDetailViewController.swift */,
+				64F3FB291D0C8B670083B4F2 /* NewProductTableViewController.swift */,
+				64F3FB271D0C74620083B4F2 /* ProductTableViewController.swift */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
 		648ABCC91D107DC00000F0E4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,14 +123,11 @@
 		64F3FB0F1D0C6CE70083B4F2 /* PKU Balanced */ = {
 			isa = PBXGroup;
 			children = (
+				64645A6E1D1DBDBB0054296A /* Product */,
+				64645A6D1D1DBD9E0054296A /* Protocol */,
 				64645A6C1D1D595F0054296A /* TableViewCells */,
 				648ABCC91D107DC00000F0E4 /* CoreData */,
 				64F3FB101D0C6CE70083B4F2 /* AppDelegate.swift */,
-				64645A581D1527A20054296A /* ProductDetailViewController.swift */,
-				64645A681D1BE3B70054296A /* ProtocolDetailViewController.swift */,
-				64645A661D1B080A0054296A /* ProtocolViewController.swift */,
-				64F3FB291D0C8B670083B4F2 /* NewProductTableViewController.swift */,
-				64F3FB271D0C74620083B4F2 /* ProductTableViewController.swift */,
 				64F3FB251D0C6E120083B4F2 /* HomeViewController.swift */,
 				64F3FB141D0C6CE70083B4F2 /* Main.storyboard */,
 				64F3FB1A1D0C6CE70083B4F2 /* Assets.xcassets */,

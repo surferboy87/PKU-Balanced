@@ -14,32 +14,37 @@ class ProtocolDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var pheLabel: UILabel!
     @IBOutlet weak var protocolTableView: UITableView!
     
-    // Retreive the managedObjectContext from AppDelegate
+    // Retreive the managedObjectContext and numberFormatter from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let numberFormatter = (UIApplication.sharedApplication().delegate as! AppDelegate).numberFormatter
     
+    // Passed values from segue
     var passedProtocols: [Protocol]!
     var passedProtocolDate: String!
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        protocolTableView.dataSource = self
-        protocolTableView.delegate = self
+        self.protocolTableView.dataSource = self
+        self.protocolTableView.delegate = self
         
+        // Set date label
         self.dateLabel.text = self.passedProtocolDate
         
+        // Sum up the products phe value in a protocol
         var calc = 0.0
         for aProtocol in passedProtocols {
             calc += self.calculatePheValue(aProtocol)
         }
+        
+        // Set the phe label
         self.pheLabel.text = "Total: " + self.numberFormatter.stringFromNumber(calc)!
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,8 +68,10 @@ class ProtocolDetailViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("protocolCell", forIndexPath: indexPath) as! DetailProtocolTableViewCell
         
-        // Configure the cell...
+        // Get the selected product int the table
         let aProtocol = passedProtocols[indexPath.row]
+        
+        // Configure the cell...
         cell.productName.text = aProtocol.product?.name
         cell.amount.text = "\(aProtocol.amount!) \(aProtocol.product!.baseUnit!)"
         cell.pheValue.text = self.numberFormatter.stringFromNumber(calculatePheValue(aProtocol))
@@ -72,25 +79,18 @@ class ProtocolDetailViewController: UIViewController, UITableViewDelegate, UITab
         return cell
     }
     
+    
+    // MARK: UITableViewDelegate
+    
     // Override to support conditional editing of the table view.
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
+    // Calculates the phe value of a protocol
     func calculatePheValue(aProtocol: Protocol) -> Double {
         return Double(aProtocol.amount!) * (Double((aProtocol.product?.pheValue)!) / Double((aProtocol.product?.basicAmount)!))
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

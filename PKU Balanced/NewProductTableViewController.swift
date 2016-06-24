@@ -30,24 +30,176 @@ class NewProductTableViewController: UITableViewController, UIPickerViewDataSour
     @IBOutlet weak var dietaryFibre: UITextField!
     @IBOutlet weak var salt: UITextField!
     
-    let pickerData = ["Gramm", "Mililiter", "Stück", "Portion"]
-    var pickedUnit = "g"
-    var alert:UIAlertController!
-    let backgroundColorInputFailure = UIColor.redColor().colorWithAlphaComponent(0.3)
-    
-    var editMode = false
-    var passedProduct: Product!
-    
-    
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    let pickerData = ["Gramm", "Mililiter", "Stück", "Portion"]
+    
+    // Set the background color for a invalid input field
+    let backgroundColorInputFailure = UIColor.redColor().colorWithAlphaComponent(0.3)
+    
+    var alert:UIAlertController!
+    var pickedUnit = "g"
+    
+    // Bool to indicate if in edit mode
+    var editMode = false
+    
+    // Passed product from segue
+    var passedProduct: Product!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        unitPicker.dataSource = self
+        unitPicker.delegate = self
+        
+        // Check if in edit mode
+        if self.editMode {
+            
+            // Fill all fields in view with the stored values
+            self.productName.text = self.passedProduct.name
+            self.basicAmount.text = String(self.passedProduct.basicAmount!)
+            self.unitPicker.selectRow(self.getIndexInPickerData(self.passedProduct.baseUnit!), inComponent: 0, animated: true)
+            self.pheValue.text = String(self.passedProduct.pheValue!)
+            
+            self.energyKj.text = String(self.passedProduct.energyKj!)
+            self.energyKcal.text = String(self.passedProduct.energyKcal!)
+            self.protein.text = String(self.passedProduct.protein!)
+            self.carbohydrates.text = String(self.passedProduct.carbohydrates!)
+            self.sugar.text = String(self.passedProduct.sugar!)
+            self.fat.text = String(self.passedProduct.fat!)
+            self.saturates.text = String(self.passedProduct.saturates!)
+            self.dietaryFibre.text = String(self.passedProduct.dietaryFibre!)
+            self.salt.text = String(self.passedProduct.salt!)
+            
+        } else {
+            
+            self.productName.becomeFirstResponder()
+            self.unitPicker.dataSource = self
+            self.unitPicker.delegate = self
+        }
+        
+    }
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in a section
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 9
+        default:
+            assert(false, "section \(section)")
+            return 0
+        }
+    }
+    
+    // MARK: - Picker view data
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        // Return the number of rows
+        return self.pickerData.count
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.pickerData[row]
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+        // Set picketUnit to the abbreviated string
+        switch self.pickerData[row] {
+        case "Gramm":
+            self.pickedUnit = "g"
+        case "Mililiter":
+            self.pickedUnit = "ml"
+        case "Stück":
+            self.pickedUnit = "Stk"
+        case "Portion":
+            self.pickedUnit = "p"
+        default:
+            self.pickedUnit = "g"
+        }
+    }
+    
+    // Get array index of a given picker data string
+    func getIndexInPickerData(unit: String) -> Int {
+        switch unit {
+        case "g":
+            return self.pickerData.indexOf("Gramm")!
+        case "ml":
+            return self.pickerData.indexOf("Mililiter")!
+        case "Stk":
+            return self.pickerData.indexOf("Stück")!
+        case "p":
+            return self.pickerData.indexOf("Portion")!
+        default:
+            return self.pickerData.indexOf("Gramm")!
+        }
+    }
+    
+    
+    // Convert a text of a textfield to a double
+    func getDoubleValueFromTextfield(textfield: UITextField) -> Double {
+        return NSString(string: textfield.text!).doubleValue
+    }
+    
+    
+    // Checks if the new product can be saved or mandatory fields missing
+    func checkMandatoryFields() -> Bool {
+        
+        // Madatory textfields in array
+        let mandatoryTextfields = [self.productName, self.basicAmount, self.pheValue]
+        
+        // Bool to indicate if it can be saved
+        var canBeSaved = true
+        
+        // Check mandatory textfields if not empty
+        for field in mandatoryTextfields {
+            if (field.text!.isEmpty) {
+                
+                // if empty, set backgroundcolor red
+                field.backgroundColor = self.backgroundColorInputFailure
+                canBeSaved = false
+            } else {
+                field.backgroundColor = UIColor.whiteColor()
+            }
+        }
+        
+        return canBeSaved
+    }
+    
     @IBAction func saveButtonAction(sender: UIBarButtonItem) {
         
+        // Check if every mandatory field is set
         if self.checkMandatoryFields() {
-
+            
+            // Check if in edit mode
             if editMode {
                 
+                // Update passedProduct with new values
                 self.passedProduct.name = self.productName.text
                 self.passedProduct.basicAmount = getDoubleValueFromTextfield(self.basicAmount)
                 self.passedProduct.baseUnit = self.pickedUnit
@@ -67,6 +219,7 @@ class NewProductTableViewController: UITableViewController, UIPickerViewDataSour
                 
             } else {
                 
+                // Create new product for core data
                 let productStrings: [String: String] = [
                     "ProductName": self.productName.text!,
                     "BaseUnit": self.pickedUnit
@@ -89,149 +242,11 @@ class NewProductTableViewController: UITableViewController, UIPickerViewDataSour
                 Product.createInManagedObjectContext(managedObjectContext, inputStrings: productStrings, inputValues: productValues)
             }
             
+            // Save core data
             (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
             
             self.navigationController?.popViewControllerAnimated(true)
         }
         
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //print(editMode)
-        
-        unitPicker.dataSource = self
-        unitPicker.delegate = self
-        
-        if self.editMode {
-            
-            self.productName.text = self.passedProduct.name
-            self.basicAmount.text = String(self.passedProduct.basicAmount!)
-            self.unitPicker.selectRow(self.getIndexInPickerData(self.passedProduct.baseUnit!), inComponent: 0, animated: true)
-            self.pheValue.text = String(self.passedProduct.pheValue!)
-            
-            self.energyKj.text = String(self.passedProduct.energyKj!)
-            self.energyKcal.text = String(self.passedProduct.energyKcal!)
-            self.protein.text = String(self.passedProduct.protein!)
-            self.carbohydrates.text = String(self.passedProduct.carbohydrates!)
-            self.sugar.text = String(self.passedProduct.sugar!)
-            self.fat.text = String(self.passedProduct.fat!)
-            self.saturates.text = String(self.passedProduct.saturates!)
-            self.dietaryFibre.text = String(self.passedProduct.dietaryFibre!)
-            self.salt.text = String(self.passedProduct.salt!)
-            
-        } else {
-            
-            self.productName.becomeFirstResponder()
-            unitPicker.dataSource = self
-            unitPicker.delegate = self
-        }
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch section {
-        case 0:
-            return 3
-        case 1:
-            return 9
-        default:
-            assert(false, "section \(section)")
-            return 0
-        }
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
-    }
-    
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-        switch self.pickerData[row] {
-        case "Gramm":
-            self.pickedUnit = "g"
-        case "Mililiter":
-            self.pickedUnit = "ml"
-        case "Stück":
-            self.pickedUnit = "Stk"
-        case "Portion":
-            self.pickedUnit = "p"
-        default:
-            self.pickedUnit = "g"
-        }
-    }
-    
-    func getIndexInPickerData(unit: String) -> Int {
-        switch unit {
-        case "g":
-            return self.pickerData.indexOf("Gramm")!
-        case "ml":
-            return self.pickerData.indexOf("Mililiter")!
-        case "Stk":
-            return self.pickerData.indexOf("Stück")!
-        case "p":
-            return self.pickerData.indexOf("Portion")!
-        default:
-            return self.pickerData.indexOf("Gramm")!
-        }
-    }
-    
-    
-    func getDoubleValueFromTextfield(textfield: UITextField) -> Double {
-        //print(NSString(string: textfield.text!).doubleValue)
-        return NSString(string: textfield.text!).doubleValue
-    }
-    
-    func checkMandatoryFields() -> Bool {
-        
-        let mandatoryTextfields = [self.productName, self.basicAmount, self.pheValue]
-        var canBeSaved = true
-        
-        for field in mandatoryTextfields {
-            if ((field.text!.isEmpty)) {
-                field.backgroundColor = self.backgroundColorInputFailure
-                canBeSaved = false
-            } else {
-                field.backgroundColor = UIColor.whiteColor()
-            }
-        }
-        return canBeSaved
-    }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

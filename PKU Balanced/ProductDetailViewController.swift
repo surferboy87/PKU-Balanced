@@ -10,8 +10,8 @@ import UIKit
 
 class ProductDetailViewController: UIViewController, UITextFieldDelegate {
     
-    var receivedProduct: Product!
-    
+    // Retreive the managedObjectContext and numberFormatter from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     let formatter = (UIApplication.sharedApplication().delegate as! AppDelegate).numberFormatter
 
     @IBOutlet weak var productName: UILabel!
@@ -32,56 +32,35 @@ class ProductDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dietaryFibre: UILabel!
     @IBOutlet weak var salt: UILabel!
 
-    
+    // Set the background color for a invalid input field
     let backgroundColorInputFailure = UIColor.redColor().colorWithAlphaComponent(0.3)
     
-    // Retreive the managedObjectContext from AppDelegate
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
-    @IBAction func addToProtocol(sender: UIButton) {
-        if self.inputAmount.text!.isEmpty {
-            self.inputAmount.backgroundColor = self.backgroundColorInputFailure
-        } else {
-            Protocol.createInManagedObjectContext(managedObjectContext, inputAmount: (self.inputAmount.text! as NSString).integerValue, inputProduct: self.receivedProduct)
-            self.inputAmount.backgroundColor = UIColor.whiteColor()
-        }
-        
-        (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
-    @IBAction func inputValueChange(sender: UITextField) {
-        if sender.text!.characters.count > 0 {
-            self.updatePheValueLabel(Double(sender.text!)!)
-        } else {
-            self.updatePheValueLabel(0)
-        }
-
-    }
+    // Passed values
+    var passedProduct: Product!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        self.productName.text = self.receivedProduct.name
+        // Fill out all values of the view based on the selected product
+        self.productName.text = self.passedProduct.name
         self.inputAmount.delegate = self
-        self.inputAmount.text = String(self.receivedProduct.basicAmount!)
+        self.inputAmount.text = String(self.passedProduct.basicAmount!)
         self.inputAmount.becomeFirstResponder()
-        self.baseUnit.text = self.receivedProduct.baseUnit!
+        self.baseUnit.text = self.passedProduct.baseUnit!
         self.updatePheValueLabel(Double(self.inputAmount.text!)!)
         
-        self.additionalInfo.text = "Informationen bezogen auf \(self.receivedProduct.basicAmount!) \(self.receivedProduct.baseUnit!)"
+        self.additionalInfo.text = "Informationen bezogen auf \(self.passedProduct.basicAmount!) \(self.passedProduct.baseUnit!)"
         
-        self.energyKj.text = getDashOrNumber(self.receivedProduct.energyKj!)
-        self.energyKcal.text = getDashOrNumber(self.receivedProduct.energyKcal!)
-        self.protein.text = getDashOrNumber(self.receivedProduct.protein!)
-        self.carbohydrates.text = getDashOrNumber(self.receivedProduct.carbohydrates!)
-        self.sugar.text = getDashOrNumber(self.receivedProduct.sugar!)
-        self.fat.text = getDashOrNumber(self.receivedProduct.fat!)
-        self.saturates.text = getDashOrNumber(self.receivedProduct.saturates!)
-        self.dietaryFibre.text = getDashOrNumber(self.receivedProduct.dietaryFibre!)
-        self.salt.text = getDashOrNumber(self.receivedProduct.salt!)
+        self.energyKj.text = getDashOrNumber(self.passedProduct.energyKj!)
+        self.energyKcal.text = getDashOrNumber(self.passedProduct.energyKcal!)
+        self.protein.text = getDashOrNumber(self.passedProduct.protein!)
+        self.carbohydrates.text = getDashOrNumber(self.passedProduct.carbohydrates!)
+        self.sugar.text = getDashOrNumber(self.passedProduct.sugar!)
+        self.fat.text = getDashOrNumber(self.passedProduct.fat!)
+        self.saturates.text = getDashOrNumber(self.passedProduct.saturates!)
+        self.dietaryFibre.text = getDashOrNumber(self.passedProduct.dietaryFibre!)
+        self.salt.text = getDashOrNumber(self.passedProduct.salt!)
     
     }
 
@@ -90,11 +69,16 @@ class ProductDetailViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK - Touchevents
+    
+    // Used to end editing and hide Keyboard
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
     }
     
+    
+    // Returns the number or a dash for representing
     func getDashOrNumber(number: NSNumber) -> String {
         if Double(number) > 0.0 {
             return String(number)
@@ -104,23 +88,41 @@ class ProductDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    // Returns the updated phe vlaue as String
     func updatePheValueLabel(value: Double){
         self.calculatedPheValue.text = formatter.stringFromNumber(self.calculatePheValue(value))
     }
     
+    
+    // Calculates the phe value of a double value
     func calculatePheValue(input: Double) -> Double {
-        return input * (Double((self.receivedProduct.pheValue)!) / Double((self.receivedProduct.basicAmount)!))
+        return input * (Double((self.passedProduct.pheValue)!) / Double((self.passedProduct.basicAmount)!))
+    }
+    
+    // Adds the product to the protocol
+    @IBAction func addToProtocol(sender: UIButton) {
+        
+        // If inputAmount textfield is not empty, create a new protocol
+        if self.inputAmount.text!.isEmpty {
+            self.inputAmount.backgroundColor = self.backgroundColorInputFailure
+        } else {
+            Protocol.createInManagedObjectContext(managedObjectContext, inputAmount: (self.inputAmount.text! as NSString).integerValue, inputProduct: self.passedProduct)
+            self.inputAmount.backgroundColor = UIColor.whiteColor()
+        }
+        
+        (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Update actual phe value based on the amount input field
+    @IBAction func inputValueChange(sender: UITextField) {
+        if sender.text!.characters.count > 0 {
+            self.updatePheValueLabel(Double(sender.text!)!)
+        } else {
+            self.updatePheValueLabel(0)
+        }
+        
     }
-    */
 
 }
